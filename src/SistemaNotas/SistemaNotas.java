@@ -10,34 +10,51 @@ public class SistemaNotas {
 	String materia,notaS;
 	//notas +=notas/materias.lenght;
 	//cont += 1 => nota>7
-	private ArrayList<Tupla<String, String>> elementos;
-	HashMap<String, ArrayList<Tupla<String, String>>> SistemaNotas = new HashMap<>();
+	private static ArrayList<Tupla<String, String>> elementos;
+	static HashMap<String, ArrayList<Tupla<String, String>>> SistemaNotas = new HashMap<>();
 	
-	public SistemaNotas() {
+	//public SistemaNotas() {
 		//Tupla<String,String> TuplaAlumno = new Tupla<String, String>(nombre, apellido);
 		//Tupla<String,Integer> TuplaMaterias = new Tupla<String, Integer>(materia, nota);
 		//HashMap<String,Tupla<K,V>> SistNotas = new HashMap<String, Tupla<K,V>>();
-		ArrayList<Tupla<String, String>> SistemaNotas = new ArrayList<Tupla<String, String>>();
+		//ArrayList<Tupla<String, String>> SistemaNotas = new ArrayList<Tupla<String, String>>();
 		
+		
+	//}
+	
+	public static void main(String []args) {
 		elementos = new ArrayList<>();
+		System.out.println(SistemaNotas);
+		agregarAlumno("42861287/2016","Frodo", "Baggins");
+		System.out.println(SistemaNotas);
+		agregarNota("42861287/2016", "prog1", 6);
+		System.out.println(SistemaNotas);
 	}
 
-	public void agregarAlumno(String libreta, String nombre, String apellido) {
+	public static void agregarAlumno(String libreta, String nombre, String apellido) {
 		Tupla<String,String> TuplaAlumno = new Tupla<String, String>(nombre, apellido);
-		HashMap<String, ArrayList<Tupla<String, String>>> SistemaNotas = new HashMap<>();
+		//ArrayList<Tupla<String, String>> elementos=new ArrayList<>();
+		//HashMap<String, ArrayList<Tupla<String, String>>> SistemaNotas = new HashMap<>();
 		if(!SistemaNotas.containsKey(libreta)) {
 			elementos.add(TuplaAlumno);
 			SistemaNotas.put(libreta, elementos);
 		}
 	}
 
-	public void agregarNota(String libreta, String materia, int nota) {
+	public static int agregarNota(String libreta, String materia, int nota) {
 		Tupla<String,String> TuplaAlumno = new Tupla<String, String>(materia, String.valueOf(nota));
-		HashMap<String, ArrayList<Tupla<String, String>>> SistemaNotas = new HashMap<>();
-		if(!SistemaNotas.containsValue(elementos.contains(TuplaAlumno))) {
+		//ArrayList<Tupla<String, String>> elementos=new ArrayList<>();
+		if(!(elementos.contains(new Tupla<String, String>(materia, String.valueOf(nota))))){
 			elementos.add(TuplaAlumno);
 			SistemaNotas.put(libreta, elementos);
-		}		
+			return 2;
+		}
+		//HashMap<String, ArrayList<Tupla<String, String>>> SistemaNotas = new HashMap<>();
+	
+			//elementos.add(TuplaAlumno);
+			//SistemaNotas.put(libreta, elementos);
+		
+		return 0;
 	}
 
 	public Integer obtenerPromedio(String libreta) {
@@ -52,7 +69,7 @@ public class SistemaNotas {
 				promedio += Integer.parseInt(TuplaAuxiliar.getNota());
 			}
 		}
-		return promedio;
+		return promedio/cantMaterias;
 	}
 
 	public Integer cantMateriasAprobadas(String libreta) {
