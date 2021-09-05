@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import SistemaNotas.SistemaNotas;
-
 /*   Enunciado Tarea Entregable TAD  2021C2
 	Subir al campus hasta el 7 de septiembre de 2021
 
@@ -52,37 +51,42 @@ Respueta:
 
 class SistemaNotasTest {
 
-private SistemaNotas sistemaNotas;
+
+	SistemaNotas SistNotas = new SistemaNotas();
 	
 	@Before
 	public void setUp() {
-		sistemaNotas = new SistemaNotas();
-		sistemaNotas.agregarAlumno("42861287/2016","Frodo", "Baggins");
 	
-		sistemaNotas.agregarNota("42861287/2016", "prog1", 6);
-		sistemaNotas.agregarNota("42861287/2016", "prog2", 10);
+	    
+	    
+	    
 		
 	}
- 
+
 	@Test
 	public void happyPathTest() {	
-		assertEquals(Integer.valueOf(8), sistemaNotas.obtenerPromedio("42861287/2016"));
-		//assertEquals(Integer.valueOf(2), sistemaNotas.cantMateriasAprobadas("42861287/2016"));
+		SistNotas.agregarAlumno("42861287/2016","Frodo", "Baggins");
+		//SistNotas.agregarAlumno(libreta, nombre, apellido);
+	
+	    SistNotas.agregarNota("42861287/2016", "prog1", 6);
+	    SistNotas.agregarNota("42861287/2016", "prog2", 10);
+		assertEquals(Integer.valueOf(8), SistNotas.obtenerPromedio("42861287/2016"));
+		assertEquals(Integer.valueOf(2), SistNotas.cantMateriasAprobadas("42861287/2016"));
 	}
-	/**	
+	
 	@Test
 	public void alumnoRepetidoTest() {		
-		sistemaNotas.agregarAlumno("42861287/2016","Frodo", "Baggins");
-		sistemaNotas.agregarNota("42861287/2016", "ip", 7);
-		sistemaNotas.agregarNota("42861287/2016", "prog2", 8);
+		SistNotas.agregarAlumno("42861287/2016","Frodo", "Baggins");
+		SistNotas.agregarNota("42861287/2016", "ip", 7);
+		SistNotas.agregarNota("42861287/2016", "prog2", 8);
 		// ip:7, p1:6, p2:8;  21/3
 		
-		System.out.println(sistemaNotas.cantMateriasAprobadas("42861287/2016"));
-		System.out.println(sistemaNotas.obtenerPromedio("42861287/2016"));
+		System.out.println(SistNotas.cantMateriasAprobadas("42861287/2016"));
+		System.out.println(SistNotas.obtenerPromedio("42861287/2016"));
 		
 		//Decision de diseno: queda la ultima nota
 	
-		assertEquals(Integer.valueOf(7), sistemaNotas.obtenerPromedio("42861287/2016"));
-	}**/
+		assertEquals(Integer.valueOf(7), SistNotas.obtenerPromedio("42861287/2016"));
+	}
 
 }
