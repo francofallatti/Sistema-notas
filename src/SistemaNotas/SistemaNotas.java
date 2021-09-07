@@ -2,34 +2,17 @@ package SistemaNotas;
 import java.util.*;
 
 public class SistemaNotas {
-	int libreta;
-	String nombre;
-	String apellido;
 	
-	int nota;
-	String materia,notaS;
-	private static  ArrayList<Tupla<String, String>> elementos;
-	 static HashMap<String, ArrayList<Tupla<String, String>>> SistNotas;
+	private ArrayList<Tupla<String, String>> elementos;
+	private HashMap<String, ArrayList<Tupla<String, String>>> SistNotas;
+	
+	private int promedio, cantMaterias;
 	
 	public SistemaNotas() {
 		
 		elementos = new ArrayList<>();
 		SistNotas = new HashMap<>();
 	}
-	
-	/**
-	public static void main(String []args) {
-		elementos = new ArrayList<>();
-		System.out.println(SistNotas);
-		agregarAlumno("42861287/2016","Frodo", "Baggins");
-		System.out.println(SistNotas);
-		agregarNota("42861287/2016", "prog1", 6);
-		System.out.println(SistNotas);
-		agregarNota("42861287/2016", "prog2", 10);
-		System.out.println(SistNotas);
-		System.out.println(obtenerPromedio("42861287/2016") + " pomedio");
-		System.out.println(cantMateriasAprobadas("42861287/2016"));
-	}**/
 
 	public void agregarAlumno(String libreta, String nombre, String apellido) {
 		Tupla<String,String> TuplaAlumno = new Tupla<String, String>(nombre, apellido);
@@ -37,7 +20,7 @@ public class SistemaNotas {
 			elementos.add(TuplaAlumno);
 			SistNotas.put(libreta, elementos);
 		}else {
-			System.out.print("so boludo? ya agregaste es alumno");
+			System.out.print("Alumno ya ingresado");
 		}
 	}
 
@@ -46,9 +29,11 @@ public class SistemaNotas {
 		if(!(elementos.contains(new Tupla<String, String>(materia, String.valueOf(nota))))){
 			elementos.add(TuplaAlumno);
 			SistNotas.put(libreta, elementos);
+			promedio = promedio + nota;
+			cantMaterias = cantMaterias + 1;
 		}		
 	}
-
+	/**
 	public Integer obtenerPromedio(String libreta) {
 		int cantMaterias = 0, promedio=0;
 		ArrayList<Tupla<String, String>> aux = new ArrayList<>();
@@ -61,7 +46,14 @@ public class SistemaNotas {
 			}
 		}
 		return promedio/cantMaterias;
+	}*/
+	
+	
+	 //O(1)
+	public Integer obtenerPromedio(String libreta) {
+		 return promedio/cantMaterias;
 	}
+	
 
 	public Integer cantMateriasAprobadas(String libreta) {
 		int cantMateriasAprobadas = 0;

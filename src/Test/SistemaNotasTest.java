@@ -3,6 +3,7 @@ package Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import SistemaNotas.SistemaNotas;
@@ -46,7 +47,49 @@ alumno de forma lo mas eficiente posible, dado que es una consulta recurrente
 Entregar un zip con los archivos java solamente, explicando el punto 2 debajo de este enunciado
 
 Respueta:
+	
+	Irrep:
 
+private ArrayList<Tupla<String, String>> elementos;
+private HashMap<String, ArrayList<Tupla<String, String>>> SistNotas;
+
+elementos = new ArrayList<>();
+SistNotas = new HashMap<>();
+
+elementos toma los valores que ingresan en los metodos y los almacena el hashMap SistNotas, el cual se encarga de guardar un alumno con su información usando su libreta com K(key).
+ 
+
+	public void agregarAlumno(String libreta, String nombre, String apellido) {...
+
+		Se encarga de almacenar en una Tupla el nombre y apellido del alumno. Y de corroborar si el alumno no está ya ingresado, para guardar la Tupla en el 		ArrayList y en el HashMap.
+	TuplaAlumno = (String nombre,String apellido)
+
+	...}
+
+	public void agregarNota(String libreta, String materia, int nota) {...
+	
+	Se encarga de almacenar en una Tupla la materia y nota del alumno. Y de corroborar que la Tupla no esté ingresada en el ArrayList.
+	TuplaAlumno = (String materia,String nota)
+	
+	...}
+
+	public Integer obtenerPromedio(String libreta) {
+	
+	int cantMaterias = 0;  cuenta la cantidad de materias almacenadas enlas tuplas del ArrayList.
+	int promedio=0; es el resultado de la suma de las notas / cantMaterias.
+	ArrayList<Tupla<String, String>> aux = new ArrayList<>(); variable auxiliar que guarda el V(value) del HashMap
+	
+	...}
+
+	public Integer cantMateriasAprobadas(String libreta) {
+	
+	int cantMateriasAprobadas = 0; contador que incrementa en +=1 si la materia tiene una nota >=4.
+	ArrayList<Tupla<String, String>> aux = new ArrayList<>(); variable auxiliar que guarda el V(value) del HashMap
+	
+	...}
+
+
+	
 */
 
 class SistemaNotasTest {
@@ -54,22 +97,19 @@ class SistemaNotasTest {
 
 	SistemaNotas SistNotas = new SistemaNotas();
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 	
-	    
-	    
-	    
-		
-	}
-
-	@Test
-	public void happyPathTest() {	
 		SistNotas.agregarAlumno("42861287/2016","Frodo", "Baggins");
 		//SistNotas.agregarAlumno(libreta, nombre, apellido);
 	
 	    SistNotas.agregarNota("42861287/2016", "prog1", 6);
 	    SistNotas.agregarNota("42861287/2016", "prog2", 10);
+	}
+
+	@Test
+	public void happyPathTest() {	
+		
 		assertEquals(Integer.valueOf(8), SistNotas.obtenerPromedio("42861287/2016"));
 		assertEquals(Integer.valueOf(2), SistNotas.cantMateriasAprobadas("42861287/2016"));
 	}
